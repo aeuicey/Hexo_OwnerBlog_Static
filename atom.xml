@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>AliceBlog</title>
+  
+  <subtitle>个人兴趣驱动的BLOG</subtitle>
+  <link href="https://aeuicey.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://aeuicey.github.io/"/>
+  <updated>2025-08-15T23:15:10.260Z</updated>
+  <id>https://aeuicey.github.io/</id>
+  
+  <author>
+    <name>Vertin_Slixey</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://aeuicey.github.io/2025/08/15/hello-world/"/>
+    <id>https://aeuicey.github.io/2025/08/15/hello-world/</id>
+    <published>2025-08-15T23:15:10.260Z</published>
+    <updated>2025-08-15T23:15:10.260Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>W32Time：同步：工作组计算机上可能会忽略 SpecialPollInterval</title>
+    <link href="https://aeuicey.github.io/2025/08/15/w32time/"/>
+    <id>https://aeuicey.github.io/2025/08/15/w32time/</id>
+    <published>2025-08-15T22:50:46.838Z</published>
+    <updated>2025-08-15T22:50:47.305Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://gcore.jsdelivr.net/gh/aeuicey/Picwent/pic/20250815173649939.png" class='item-img' data-src='https://gcore.jsdelivr.net/gh/aeuicey/Picwent/pic/20250815173649939.png'><img src="https://gcore.jsdelivr.net/gh/aeuicey/Picwent/pic/20250815173649939.png"></a></p><p>本文可帮助修复 NTP 客户端未按预期同步 SpecialPollInterval 期间的时间的问题。</p><p><em>原始 KB 数：</em> 3205089</p><h2 id="现象"><a href="#现象" class="headerlink" title="现象"></a><strong>现象</strong></h2><p>假设修改 W32time 设置以始终运行，并且以下条件之一为 true：</p><ul><li>使用默认工作站设置。</li><li>使用具有大型 SpecialPollInterval 设置值的自定义 NTP 同步设置。</li></ul><p>在此方案中，NTP 客户端不会按预期同步 SpecialPollInterval 期间的时间。</p><h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a><strong>原因</strong></h2><p>由于 Windows 时间服务处理大型 SpecialPollInterval 值的方式，时间可能会以比预期更长的间隔从 NTP 服务器同步。</p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a><strong>解决方法</strong></h2><h3 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法 1"></a><strong>解决方法 1</strong></h3><p>指定比默认值更小的 SpecialPollInterval 值。 默认值如下：</p><p>MinPollInterval &#x3D; 0xA （&#x3D;&#x3D; 2^10 秒 &#x3D;&#x3D; 1024 秒）<br>MaxPollInterval &#x3D; 0xF （&#x3D;&#x3D; 2^15 秒 &#x3D;&#x3D; 32768 秒）<br>SpecialPollInterval &#x3D; 604800 秒</p><p>指定一个 SpecialPollInterval 值，该值位于 MinPollInterval 和 MaxPollInterval 之间。 示例值为 3600 秒（&#x3D;&#x3D; 1 小时）。</p><p>若要使用新设置配置 W32time，请执行以下步骤：</p><ol><li><p>启动“注册表编辑器”。</p></li><li><p>更改以下注册表项的值：<br><code>HKEY_LOCAL_MACHINE \SYSTEM\CurrentControlSet\Services\W32Time\TimeProviders\NtpClient</code><br>值名称：SpecialPollInterval<br>默认值：604800<br>修改值：3600</p></li><li><p>重启 Windows 时间服务，或运行以下命令来向 W32time 发出有关修改后的配置的信息：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">w32tm /config /update  <br></code></pre></td></tr></table></figure><p>Bash</p></li></ol><h3 id="解决方法-2"><a href="#解决方法-2" class="headerlink" title="解决方法 2"></a><strong>解决方法 2</strong></h3><p>使用基于 MinPollInterval、MaxPollInterval 而不是使用 SpecialPollInterval 的内置轮询间隔调整。 如果客户端计算机保持相当准确的时间，此内置工具会自动调整从 MinPollInterval 到 MaxPollInterval 的轮询间隔。 只需修改 NtpServer 配置中的标志才能从 SpecialPollInterval 切换到自动轮询间隔，如下所示：</p><ol><li>启动“注册表编辑器”。</li><li>更改以下注册表项的值：<br><code>HKEY_LOCAL_MACHINE \SYSTEM\CurrentControlSet\Services\W32Time\Parameters</code><br>值名称：NtpServer<br>默认值： <code>time.windows.com</code>、0x9<br>修改的值： <code>time.windows.com</code>、0x8</li><li>重启 Windows 时间服务，或运行以下命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">w32tm /config /update  <br></code></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://gcore.jsdelivr.net/gh/aeuicey/Picwent/pic/20250815173649939.png&quot; class=&#39;item-img&#39; data-src=&#39;https://gcore.jsdelivr.net/g</summary>
+      
+    
+    
+    
+    <category term="技术" scheme="https://aeuicey.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+    <category term="技术" scheme="https://aeuicey.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+    <category term="windows" scheme="https://aeuicey.github.io/tags/windows/"/>
+    
+    <category term="微软" scheme="https://aeuicey.github.io/tags/%E5%BE%AE%E8%BD%AF/"/>
+    
+    <category term="时间同步" scheme="https://aeuicey.github.io/tags/%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Test</title>
+    <link href="https://aeuicey.github.io/2025/08/15/test_first/"/>
+    <id>https://aeuicey.github.io/2025/08/15/test_first/</id>
+    <published>2025-08-15T20:03:03.542Z</published>
+    <updated>2025-08-15T20:38:26.955Z</updated>
+    
+    <content type="html"><![CDATA[<p>用来测试工作流与GithubPages的状态,检测</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;用来测试工作流与GithubPages的状态,检测&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>

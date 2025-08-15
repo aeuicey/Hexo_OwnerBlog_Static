@@ -1,0 +1,80 @@
+<h1 id="Hexo-OwnerBlog"><a href="#Hexo-OwnerBlog" class="headerlink" title="Hexo_OwnerBlog"></a>Hexo_OwnerBlog</h1><p><a href="https://github.com/aeuicey/Hexo_OwnerBlog/actions/workflows/main.yml"><img src="https://github.com/aeuicey/Hexo_OwnerBlog/actions/workflows/main.yml/badge.svg" alt="Blog CI&#x2F;CD"></a><br><a href="https://github.com/aeuicey/Hexo_OwnerBlog/blob/main/LICENSE"><img src="https://img.shields.io/github/license/aeuicey/Hexo_OwnerBlog" alt="GitHub license"></a></p>
+<p>基于 Hexo 的个人博客项目，采用 arknights 主题，集成自动化部署流程，支持丰富的博客功能。</p>
+<h2 id="✨-项目特点"><a href="#✨-项目特点" class="headerlink" title="✨ 项目特点"></a>✨ 项目特点</h2><ul>
+<li><strong>主题特色</strong>：使用 arknights 主题，支持明暗模式切换，自定义背景图片</li>
+<li><strong>功能完备</strong>：包含文章归档、分类标签、搜索功能、代码高亮等</li>
+<li><strong>评论系统</strong>：支持 Valine、Gitalk、Waline 等多种评论插件（可配置）</li>
+<li><strong>数学公式</strong>：集成 KaTeX 支持，可渲染复杂数学公式</li>
+<li><strong>自动化部署</strong>：通过 GitHub Actions 实现代码推送后自动构建部署</li>
+<li><strong>性能优化</strong>：包含缓存机制、静态资源优化等</li>
+</ul>
+<h2 id="🚀-快速开始"><a href="#🚀-快速开始" class="headerlink" title="🚀 快速开始"></a>🚀 快速开始</h2><h3 id="本地开发环境搭建"><a href="#本地开发环境搭建" class="headerlink" title="本地开发环境搭建"></a>本地开发环境搭建</h3><ol>
+<li><p>克隆仓库</p>
+<pre><code class="language-bash">git clone https://github.com/aeuicey/Hexo_OwnerBlog.git
+cd Hexo_OwnerBlog
+</code></pre>
+</li>
+<li><p>安装依赖</p>
+<pre><code class="language-bash">npm install
+</code></pre>
+</li>
+<li><p>启动本地服务器</p>
+<pre><code class="language-bash">npm run server
+# 或使用 hexo 命令
+hexo server
+</code></pre>
+</li>
+<li><p>访问 <code>http://localhost:4000</code> 查看博客</p>
+</li>
+</ol>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><pre><code class="language-bash"># 创建新文章
+hexo new &quot;文章标题&quot;
+
+# 生成静态文件
+hexo generate
+# 或
+npm run build
+
+# 清理生成文件
+npm run clean
+
+# 部署到远程
+npm run deploy
+</code></pre>
+<h2 id="⚙️-配置说明"><a href="#⚙️-配置说明" class="headerlink" title="⚙️ 配置说明"></a>⚙️ 配置说明</h2><p>主要配置文件：</p>
+<ul>
+<li><code>_config.yml</code>：Hexo 核心配置，包含站点信息、URL、目录结构等</li>
+<li><code>_config.arknights.yml</code>：主题配置，包含主题样式、菜单、社交链接等</li>
+</ul>
+<p>可自定义的关键配置：</p>
+<ul>
+<li>站点信息：标题、副标题、作者等</li>
+<li>主题设置：颜色模式、背景图片、导航菜单</li>
+<li>评论系统：选择并配置适合的评论插件</li>
+<li>部署设置：修改 <code>deploy</code> 部分配置部署目标</li>
+</ul>
+<h2 id="📦-部署方式"><a href="#📦-部署方式" class="headerlink" title="📦 部署方式"></a>📦 部署方式</h2><p>项目采用 GitHub Actions 实现自动化部署：</p>
+<ol>
+<li>推送代码到 <code>main</code> 或 <code>master</code> 分支</li>
+<li>触发 CI&#x2F;CD 流程，自动执行依赖安装、构建</li>
+<li>部署到指定的 Git 仓库</li>
+</ol>
+<p>需提前配置的 Secrets：</p>
+<ul>
+<li><code>GH_TOKEN</code>：GitHub 访问令牌</li>
+<li><code>GH_REF</code>：部署目标仓库地址</li>
+<li><code>GIT_NAME</code>：提交者名称</li>
+<li><code>GIT_EMAIL</code>：提交者邮箱</li>
+</ul>
+<h2 id="🎨-主题定制"><a href="#🎨-主题定制" class="headerlink" title="🎨 主题定制"></a>🎨 主题定制</h2><ul>
+<li>自定义背景图片：修改 <code>_config.arknights.yml</code> 中的 <code>background_image</code> 配置</li>
+<li>调整颜色模式：设置 <code>color</code> 选项（dark&#x2F;light&#x2F;auto 等）</li>
+<li>添加社交链接：在 <code>social</code> 部分配置相关链接和图标</li>
+<li>启用评论功能：选择一种评论系统并填写对应配置信息</li>
+</ul>
+<h2 id="📄-许可证"><a href="#📄-许可证" class="headerlink" title="📄 许可证"></a>📄 许可证</h2><p>本项目采用 MIT 许可证 - 详情参见 <a href="LICENSE">LICENSE</a> 文件</p>
+<h2 id="🔗-相关链接"><a href="#🔗-相关链接" class="headerlink" title="🔗 相关链接"></a>🔗 相关链接</h2><ul>
+<li><a href="https://hexo.io/docs/">Hexo 官方文档</a></li>
+<li><a href="https://github.com/...">arknights 主题</a></li>
+<li><a href="https://github.alicetec.cn/">博客预览</a></li>
+</ul>
